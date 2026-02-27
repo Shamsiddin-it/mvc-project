@@ -34,5 +34,27 @@ namespace mvc.Controllers
             var product = repo.GetById(id);
             return View(product);
         }
+
+        public IActionResult Delete(int id)
+        {
+            repo.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var product = repo.GetById(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (!ModelState.IsValid)
+                return View(product);
+
+            repo.Edit(product);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

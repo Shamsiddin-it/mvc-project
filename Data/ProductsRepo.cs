@@ -22,4 +22,16 @@ public class ProductsRepo
         return product;
     }
 
+    public string Delete(int id)
+    {
+        products.RemoveAll(x=>x.Id==id);
+        return "Deleted successfully!";
+    }
+
+    public void Edit(Product product)
+    {
+        var pr = products.Find(x=>x.Id==product.Id);
+        pr.Name = product.Name;
+        pr.Price = product.Price;
+    }
 }
